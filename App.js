@@ -15,20 +15,16 @@ import { StyleSheet, Text, View } from 'react-native';
 export default class App extends React.Component {
   render () {
     return (
-      <View style={styles.container}>
-        <Search/>
-        <Text>Hello plop</Text>
-        <StatusBar style="auto" />
-      </View>
+      <Search/>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#36393f',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+// });
