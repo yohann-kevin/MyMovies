@@ -10,7 +10,7 @@ class Search extends React.Component {
                 <TextInput placeholder="Titre du film" style={ styles.TextInput } />
                 <Button title="Rechercher" onPress={() => {}} style={ styles.button } />
                 {/* Ici j'ai simplement repris l'exemple sur la documentation de la FlatList */}
-                <FlatList data={films} keyExtractor={(item) => item.id.toString() } renderItem={({item}) => <FilmItem/>} />
+                <FlatList data={films} keyExtractor={(item) => item.id.toString() } renderItem={({item}) => <FilmItem film={item}/>} />
             </View>
         )
     };
