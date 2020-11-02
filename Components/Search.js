@@ -1,16 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, FlatList, TextInput} from 'react-native';
-import films from '../Helpers/filmsData';
-import FilmItem from './FilmItem';
+// import films from '../Helpers/filmsData';
+// import FilmItem from './FilmItem';
+import { getFilmsFromApiWithSearchedText } from '../API/TMDBApi';
 
 class Search extends React.Component {
+    _loadFilms() {
+        getFilmsFromApiWithSearchedText("star").then(data => console.log(data))
+    }
+
     render() {
         return (
             <View style={ styles.view }>
                 <TextInput placeholder="Titre du film" style={ styles.TextInput } />
-                <Button title="Rechercher" onPress={() => {}} style={ styles.button } />
-                {/* Ici j'ai simplement repris l'exemple sur la documentation de la FlatList */}
-                <FlatList data={films} keyExtractor={(item) => item.id.toString() } renderItem={({item}) => <FilmItem film={item}/>} />
+                <Button title="Rechercher" onPress={() => this._loadFilms()} style={ styles.button } />
+                {/* <FlatList data={films} keyExtractor={(item) => item.id.toString() } renderItem={({item}) => <FilmItem film={item}/>} /> */}
             </View>
         )
     };
