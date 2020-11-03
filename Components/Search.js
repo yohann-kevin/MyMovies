@@ -7,23 +7,28 @@ import { getFilmsFromApiWithSearchedText } from '../API/TMDBApi';
 class Search extends React.Component {
     constructor(props) {
         super(props)
+        this.page = 0;
+        this.totalPages = 0;
+        this.searchedText = "";
         this.state = { 
             films: [],
             isLoading: false
         }
-        this.searchedText = "";
     }
 
     _loadFilms() {
-        this.setState({ isLoading: true })
+        
         if (this.searchedText.length > 0) {
-            getFilmsFromApiWithSearchedText(this.searchedText).then(data => 
+            this.setState({ isLoading: true })
+            getFilmsFromApiWithSearchedText(this.searchedText, this.page + 1).then(data => {
+                this.page = data.page
+                this.totalPages = data.total_pages
                 this.setState({ 
-                    films: data.results,
+                    films: [...this.state.films, ...data.results],
                     isLoading: false
                 })
-            )
-        }
+            }  
+        )}
     }
 
     _displayLoading() {
@@ -40,12 +45,41 @@ class Search extends React.Component {
         this.searchedText = text;
     }
 
+    _searchFilms() {
+        this.page = 0
+        this.totalPages = 0
+        this.setState({
+            films: [],
+        }, () => {
+           this._loadFilms() 
+        })
+    }
+
     render() {
         return (
             <View style={ styles.view }>
-                <TextInput onSubmitEditing={() => this._loadFilms()} onChangeText={(text) => this._searchTextInputChanged(text)} placeholder="Titre du film" style={ styles.TextInput } />
-                <Button title="Rechercher" onPress={() => this._loadFilms()} style={ styles.button } />
-                <FlatList data={this.state.films} keyExtractor={(item) => item.id.toString() } renderItem={({item}) => <FilmItem film={item}/>} />
+                <TextInput 
+                    onSubmitEditing={() => this._searchFilms()} 
+                    onChangeText={(text) => this._searchTextInputChanged(text)} 
+                    placeholder="Titre du film" 
+                    style={ styles.TextInput } 
+                />
+                <Button 
+                    title="Rechercher" 
+                    onPress={() => this._searchFilms()} 
+                    style={ styles.button } 
+                />
+                <FlatList 
+                    data={this.state.films} 
+                    keyExtractor={(item) => item.id.toString() } 
+                    onEndReachedThreshold={0.5} 
+                    onEndReached={() => {
+                        if (this.page < this.totalPages) {
+                            this._loadFilms()
+                        }
+                    }}
+                    renderItem={({item}) => <FilmItem film={item}/>} 
+                />
                 {this._displayLoading()}
             </View>
         )
