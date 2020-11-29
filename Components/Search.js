@@ -55,6 +55,10 @@ class Search extends React.Component {
         })
     }
 
+    _displayDetailForFilm = (idFilm) => {
+        console.log("Display film with id " + idFilm);
+    }
+
     render() {
         return (
             <View style={ styles.view }>
@@ -78,7 +82,7 @@ class Search extends React.Component {
                             this._loadFilms()
                         }
                     }}
-                    renderItem={({item}) => <FilmItem film={item}/>} 
+                    renderItem={({item}) => <FilmItem film={item} displayDetailForFilm={this._displayDetailForFilm}/>} 
                 />
                 {this._displayLoading()}
             </View>
@@ -88,7 +92,6 @@ class Search extends React.Component {
 
 const styles = StyleSheet.create ({
     view: {
-        marginTop: 20,
         flex: 1,
     },  
     TextInput: {
