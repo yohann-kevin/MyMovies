@@ -12,8 +12,8 @@ export function getImageFromApi(name) {
     return 'https://image.tmdb.org/t/p/w300' + name;
 }
 
-export function getFilmDetailFromApi() {
-    const url = 'https://api.themoviedb.org/3/movie' + id + '?api_key' + apiToken + '&language=fr';
+export function getFilmDetailFromApi(id) {
+    const url = 'https://api.themoviedb.org/3/movie/' + id + '?api_key=' + apiToken + '&language=fr';
     return fetch(url)
         .then((response) => response.json())
         .catch((error) => console.error(error))    
