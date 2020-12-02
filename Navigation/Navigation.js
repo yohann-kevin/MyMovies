@@ -7,11 +7,25 @@ const SearchStackNavigator = createStackNavigator({
     Search: {
         screen: Search,
         navigationOptions: {
-            title: "Rechercher"
+            title: "Rechercher",
+            headerStyle: {
+                backgroundColor: "#2f3136"
+            },
+            headerTitleStyle: {
+                color: '#ffffff'
+            }
         }
     },
     FilmDetail: {
-        screen: FilmDetail
+        screen: FilmDetail,
+        navigationOptions: {
+            headerStyle: {
+                backgroundColor: "#2f3136"
+            },
+            headerTitleStyle: {
+                color: '#ffffff'
+            }
+        }
     }
 });
 
