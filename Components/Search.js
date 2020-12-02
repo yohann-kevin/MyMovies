@@ -67,6 +67,7 @@ class Search extends React.Component {
                     onChangeText={(text) => this._searchTextInputChanged(text)} 
                     placeholder="Titre du film" 
                     style={ styles.TextInput } 
+                    placeholderTextColor={"#efefef"}
                 />
                 <Button 
                     title="Rechercher" 
@@ -107,10 +108,10 @@ const styles = StyleSheet.create ({
         marginLeft: 5,
         marginRight: 5,
         height: 50,
-        borderColor: "white",
         border: 'none',
         borderWidth: 1,
         paddingLeft: 5,
+        color: '#ffffff'
     },
     button: {
         height: 50,
