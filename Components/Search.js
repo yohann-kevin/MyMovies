@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, ActivityIndicator, View, Button, FlatList, TextInput} from 'react-native';
 import FilmItem from './FilmItem';
 import { getFilmsFromApiWithSearchedText } from '../API/TMDBApi';
+import { connect } from 'react-redux';
 
 class Search extends React.Component {
     constructor(props) {
@@ -72,17 +73,24 @@ class Search extends React.Component {
                     onPress={() => this._searchFilms()} 
                     style={ styles.button } 
                 />
-                <FlatList 
-                    data={this.state.films} 
-                    keyExtractor={(item) => item.id.toString() } 
-                    onEndReachedThreshold={0.5} 
+                <FlatList
+                    data={this.state.films}
+                    extraData={this.props.favoritesFilm}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({item}) =>
+                        <FilmItem
+                        film={item}
+                        isFilmFavorite={(this.props.favoritesFilm.findIndex(film => film.id === item.id) !== -1) ? true : false}
+                        displayDetailForFilm={this._displayDetailForFilm}
+                        />
+                    }
+                    onEndReachedThreshold={0.5}
                     onEndReached={() => {
-                        if (this.page < this.totalPages) {
+                        if (this.page < this.totalPages) { 
                             this._loadFilms()
                         }
                     }}
-                    renderItem={({item}) => <FilmItem film={item} displayDetailForFilm={this._displayDetailForFilm}/>} 
-                />
+                    />
                 {this._displayLoading()}
             </View>
         )
@@ -115,4 +123,10 @@ const styles = StyleSheet.create ({
     }
 })
 
-export default Search;
+const mapStateToProps = state => {
+    return {
+      favoritesFilm: state.favoritesFilm
+    }
+  }
+  
+  export default connect(mapStateToProps)(Search)

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, ActivityIndicator, ScrollView, Image, Button } from 'react-native';
+import { StyleSheet, View, Text, ActivityIndicator, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { getFilmDetailFromApi, getImageFromApi } from '../API/TMDBApi';
 import moment from 'moment';
 import numeral from 'numeral';
@@ -41,6 +41,16 @@ class FilmDetail extends React.Component {
     componentDidUpdate() {
       console.log(this.props.favoritesFilm);
     }
+
+    _displayFavoriteImage() {
+      let sourceImage = require('../Images/notFavorite.png')
+      if (this.props.favoritesFilm.findIndex(item => item.id === this.state.film.id) !== -1) {
+        sourceImage = require('../Images/favorite.png')
+      }
+      return (
+        <Image source={sourceImage} style={styles.favoriteImage}/>
+      )
+    }
   
     _displayFilm() {
       const { film } = this.state
@@ -52,7 +62,9 @@ class FilmDetail extends React.Component {
               source={{uri: getImageFromApi(film.backdrop_path)}}
             />
             <Text style={styles.titleText}>{film.title}</Text>
-            <Button title="Favoris" onPress={() => this._toggleFavorite()}/>
+            <TouchableOpacity style={styles.favoriteContainer} onPress={() => this._toggleFavorite()}>
+              {this._displayFavoriteImage()}
+            </TouchableOpacity>
             <Text style={styles.descriptionText}>{film.overview}</Text>
             <Text style={styles.defaultText}>Sorti le {moment(new Date(film.release_date)).format('DD/MM/YYYY')}</Text>
             <Text style={styles.defaultText}>Note : {film.vote_average} / 10</Text>
@@ -122,7 +134,14 @@ const styles = StyleSheet.create({
   defaultText: {
     marginLeft: 5,
     marginRight: 5,
-    marginTop: 5,
+    marginTop: 5
+  },
+  favoriteContainer: {
+    alignItems: 'center'
+  },
+  favoriteImage: {
+    width: 40,
+    height: 40
   }
 })
 
