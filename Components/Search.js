@@ -100,14 +100,17 @@ class Search extends React.Component {
 const styles = StyleSheet.create ({
     view: {
         flex: 1,
+        backgroundColor: '#36393f',
+        color: '#ffffff'
     },  
     TextInput: {
         marginLeft: 5,
         marginRight: 5,
         height: 50,
         borderColor: "white",
+        border: 'none',
         borderWidth: 1,
-        paddingLeft: 5
+        paddingLeft: 5,
     },
     button: {
         height: 50,

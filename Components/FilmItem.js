@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
+import { color } from 'react-native-reanimated';
 import { getImageFromApi } from '../API/TMDBApi'
 
 class FilmItem extends React.Component {
@@ -64,26 +65,28 @@ const styles = StyleSheet.create({
     fontSize: 20,
     flex: 1,
     flexWrap: 'wrap',
-    paddingRight: 5
+    paddingRight: 5,
+    color: '#ffffff'
   },
   voteText: {
     fontWeight: 'bold',
     fontSize: 26,
-    color: '#666666'
+    color: '#efefef'
   },
   descriptionContainer: {
     flex: 7
   },
   descriptionText: {
     fontStyle: 'italic',
-    color: '#666666'
+    color: '#efefef'
   },
   dateContainer: {
     flex: 1
   },
   dateText: {
     textAlign: 'right',
-    fontSize: 14
+    fontSize: 14,
+    color: '#efefef'
   },
   favoriteImage: {
     width: 25,

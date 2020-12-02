@@ -95,7 +95,8 @@ class FilmDetail extends React.Component {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "#36393f"
   },
   loadingContainer: {
     position: 'absolute',
@@ -122,19 +123,20 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginTop: 10,
     marginBottom: 10,
-    color: '#000000',
+    color: '#ffffff',
     textAlign: 'center'
   },
   descriptionText: {
     fontStyle: 'italic',
-    color: '#666666',
+    color: '#efefef',
     margin: 5,
     marginBottom: 15
   },
   defaultText: {
     marginLeft: 5,
     marginRight: 5,
-    marginTop: 5
+    marginTop: 5,
+    color: '#efefef'
   },
   favoriteContainer: {
     alignItems: 'center'
